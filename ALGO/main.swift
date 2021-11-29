@@ -7,7 +7,8 @@
 
 import Foundation
 
-//import UIKit
+
+//MARK: variables
 
 let newArray = [1,2,3,4,5]
 let target = 6
@@ -28,6 +29,8 @@ tuple.secondValue = "two"
 print(tuple.firstValue, tuple.secondValue)
 
 
+
+//MARK: basic functions
 
 for i in 0...5 {
     print(i)
