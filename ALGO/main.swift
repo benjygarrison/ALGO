@@ -84,5 +84,30 @@ case false:
     print("false")
 }
 
+//MARK: optionals
+
+//optional expresses the abscence of a value: i.e. one that takes input
+//nil = nothing
+
+//regular optionals use ?
+
+var optionalOne: Int? = 100
+
+if optionalOne == nil {
+    print("nothing to see here")
+} else {
+    print("someone's inside")
+}
+
+//optional binding
+
+if let optionalOne = optionalOne {
+    print("optionalOne = " + "\(optionalOne)")
+}
+
+//implicit optionals use ! (xCode thinks it's risky), cannot ne used like regular
+//variable if it is nil
+
+var optionalTwo: Int!
 
 
