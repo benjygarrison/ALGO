@@ -29,12 +29,27 @@ tuple.secondValue = "two"
 print(tuple.firstValue, tuple.secondValue)
 
 
-
 //MARK: basic functions
+
+//arrow indicates return type of function
+
+func practiceFunction(a: String, b: Int) -> String {
+    
+    //this function could return int or string dependent on choice after arrow
+    
+    let testString: String = "\(a), \(b)"
+    print(testString)
+    return testString
+}
+
+practiceFunction(a: "foo", b: 30)
+
 
 for i in 0...5 {
     print(i)
 }
+
+//use underscore when you don't car about returning the value of the variable (i.e. "i above")
 
 for _ in 0..<5 {
     print("loop")
@@ -86,10 +101,7 @@ case false:
 
 //MARK: optionals
 
-//optional expresses the abscence of a value: i.e. one that takes input
-//nil = nothing
-
-//regular optionals use ?
+//optional expresses the abscence of a value: i.e. one that takes input. nil = nothing. regular optionals use ?
 
 var optionalOne: Int? = 100
 
@@ -102,12 +114,20 @@ if optionalOne == nil {
 //optional binding
 
 if let optionalOne = optionalOne {
-    print("optionalOne = " + "\(optionalOne)")
+    print("optionalOne = \(optionalOne)")
 }
 
-//implicit optionals use ! (xCode thinks it's risky), cannot ne used like regular
-//variable if it is nil
+var optionalString: String? = "kiwi"
 
-var optionalTwo: Int!
+if let optionalString = optionalString {
+    print("optionalString = \(optionalString)")
+}
 
+//implicit optionals use ! (xCode thinks it's risky), cannot be used like regular variable if it is nil (the program will crash)
 
+var optionalTwo: Int! = nil
+
+optionalTwo = optionalOne!
+
+var optionalThree = optionalTwo + 3
+print(optionalThree)
