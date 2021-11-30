@@ -114,6 +114,23 @@ var inoutIntTest = 5
 inoutTest(inoutIntTest: &inoutIntTest)
 print("inoutTest = \(inoutIntTest)")
 
+//MARK: return types
+
+//returning a tuple
+
+func returnTuple(tupleName: String) -> (firstTupleName: String, secondTupleName: String) {
+    
+    let firstTupleName = "first name"
+    let secondTupleName = "last name"
+    return (firstTupleName, secondTupleName)
+    
+}
+
+let tupleFunctionTestReturn = returnTuple(tupleName: "default")
+print(tupleFunctionTestReturn)
+print("\(tupleFunctionTestReturn.secondTupleName), \(tupleFunctionTestReturn.firstTupleName)")
+
+
 //MARK: optionals
 
 //optional expresses the abscence of a value: i.e. one that takes input. nil = nothing. regular optionals use ?
