@@ -32,6 +32,7 @@ print(tuple.firstValue, tuple.secondValue)
 //MARK: basic functions
 
 //arrow indicates return type of function
+//functions can have external and internal names for same variables. they can both be listed in main function argument, i.e. func myFunc(testStringExtern testStringIntern: String) -> {}, or remove external argument altogether by replacing with underscore, i.e. (_ testStringIntern: String). Add question mark for optional, etc.
 
 func practiceFunction(a: String, b: Int) -> String {
     
@@ -42,7 +43,11 @@ func practiceFunction(a: String, b: Int) -> String {
     return testString
 }
 
-practiceFunction(a: "foo", b: 30)
+// call function: practiceFunction(a: "foo", b: 30)
+
+//assign entire function to variable:
+
+let funcVariable = practiceFunction(a: "test", b: 100)
 
 
 for i in 0...5 {
@@ -98,6 +103,16 @@ case true:
 case false:
     print("false")
 }
+
+// "passing by reference" = inout functions
+
+func inoutTest(inoutIntTest: inout Int) {
+    inoutIntTest = inoutIntTest * 5
+}
+
+var inoutIntTest = 5
+inoutTest(inoutIntTest: &inoutIntTest)
+print("inoutTest = \(inoutIntTest)")
 
 //MARK: optionals
 
