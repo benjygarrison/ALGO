@@ -140,6 +140,27 @@ if let a = returnOptionalFunction(){
     print(a)
 }
 
+//MARK: generics
+
+//can declare a single generic for multiple data types
+
+func swapVariables<genericTest>(_ aGen: inout genericTest, _ bGen: inout genericTest){
+    let genTest = aGen
+    aGen = bGen
+    bGen = genTest
+}
+
+//variables below can be declared as any data type, not reqiored to be Int (can even be tuples!)
+
+var aGen = 55
+var bGen = 100
+
+print(aGen)
+print(bGen)
+
+swapVariables(&aGen, &bGen)
+
+print(aGen, bGen)
 
 //MARK: optionals
 
