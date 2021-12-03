@@ -130,6 +130,16 @@ let tupleFunctionTestReturn = returnTuple(tupleName: "default")
 print(tupleFunctionTestReturn)
 print("\(tupleFunctionTestReturn.secondTupleName), \(tupleFunctionTestReturn.firstTupleName)")
 
+//return an optional, no argument; need IF statement
+
+func returnOptionalFunction() -> String? {
+    return "completely optional"
+}
+
+if let a = returnOptionalFunction(){
+    print(a)
+}
+
 
 //MARK: optionals
 
