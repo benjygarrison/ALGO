@@ -150,7 +150,7 @@ func swapVariables<genericTest>(_ aGen: inout genericTest, _ bGen: inout generic
     bGen = genTest
 }
 
-//variables below can be declared as any data type, not reqiored to be Int (can even be tuples!)
+//variables below can be declared as any data type, not required to be Int (can even be tuples!)
 
 var aGen = 55
 var bGen = 100
@@ -194,3 +194,19 @@ optionalTwo = optionalOne!
 
 var optionalThree = optionalTwo + 3
 print(optionalThree)
+
+
+//MARK: native collections
+
+//creating/accessing arrays
+
+let firstArray = ["index 0", "index 1", "index 2"]
+
+print(firstArray[1])
+
+
+
+
+
+
+
