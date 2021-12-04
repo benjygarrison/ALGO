@@ -200,10 +200,36 @@ print(optionalThree)
 
 //creating/accessing arrays
 
-let firstArray = ["index 0", "index 1", "index 2"]
+let firstArray = [2, 3, 4]
 
-print(firstArray[1])
+print("firstArray multiplied: \(firstArray[1] * 2)")
 
+//call prefix or suffix from array:
+
+print("first array prefix and suffix: \(firstArray.prefix(2)) , \(firstArray.suffix(2))")
+
+//search array:
+
+print("firstArray contains 2: \(firstArray.contains(2))")
+
+//equality operator:
+
+print("first array is equal to [2,3,4]: \(firstArray == [2,3,4])")
+
+//possible ways of declaring arrays: var a: [Int] = [1,2,3], var a = Array<Int>([1, 2, 3]), var a = [Int]([1,2,3])
+
+//operations that can be performed:
+//change value: a[2] = 9
+//append: a.append(23)
+//insert: a.insert(3, at: 1)
+//concatenate: let b = a + [99, 45] -> values will be appended, apparently
+
+//loop through array:
+
+for n in firstArray {
+    print("looping first array: \(n)")
+}
+//can also swap n for _ and not use a specific value, i.e. just return an unrelated string or input base don number of items in loop
 
 
 
