@@ -195,6 +195,36 @@ optionalTwo = optionalOne!
 var optionalThree = optionalTwo + 3
 print(optionalThree)
 
+//MARK: dictionaries (i.e. hash values)
+
+//Dictionary<Key, Value>()
+
+var firstDictionary = Dictionary<String,Int>() //longhand
+var secondDictionary = [String: Int]() // shorthand -> preferred
+var thirdDictionary: [Int: String] = [
+    1: "ben",
+    2: "hana"
+] // declare empty dictionary -> need colon in empty brackets
+
+//add new value:
+thirdDictionary[3] = "kiwi"
+
+//overwrite value:
+thirdDictionary[3] = "ringo"
+
+if let dictionaryValue = thirdDictionary[2] {
+    print("\(dictionaryValue) exists!")
+}
+
+for dictionaryTuple in thirdDictionary {
+    print(dictionaryTuple)
+}
+    for(key, value) in thirdDictionary {
+        print("\(key), \(value)")
+    }
+
+//accessing values:
+
 
 //MARK: native collections
 
