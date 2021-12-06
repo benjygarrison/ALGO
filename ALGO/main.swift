@@ -216,6 +216,12 @@ if let dictionaryValue = thirdDictionary[2] {
     print("\(dictionaryValue) exists!")
 }
 
+if let _ = thirdDictionary[2] {
+    print("yep, it's there")
+} else {
+    print("nope, it's not")
+}
+
 for dictionaryTuple in thirdDictionary {
     print(dictionaryTuple)
 }
@@ -245,6 +251,12 @@ print("firstArray contains 2: \(firstArray.contains(2))")
 //equality operator:
 
 print("first array is equal to [2,3,4]: \(firstArray == [2,3,4])")
+
+//iterate array and return index and value:
+
+for (index, n) in firstArray.enumerated() {
+    print("first array values -> \(index): \(n)")
+}
 
 //possible ways of declaring arrays: var a: [Int] = [1,2,3], var a = Array<Int>([1, 2, 3]), var a = [Int]([1,2,3])
 
