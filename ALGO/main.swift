@@ -481,3 +481,86 @@ benTeacher.changeAge()
 benStudent.changeAge()
 
 print(benTeacher.protocolAge, benStudent.protocolAge)
+
+
+
+//MARK: closures AKA lambdas, blocks -> are a Type
+
+//style: let closureName: (Parameter 1, Parameter 2) -> ReturnType
+// used for short blocks of reusable code, especially if reused often
+
+let joinStrings: (String, String) -> String = {(leftHandString, rightHandString) in
+    return leftHandString + rightHandString
+}
+
+//using Swift auto-naming conventions (using indexes of unnamed items in the list of "String, String"):
+
+let automaticJoinStrings: (String, String) -> String = {
+    return $0 + $1 //even use of "return is optional here"
+}
+
+let ultraSimpleJoinStrings: (String, String) -> String = {$0 + $1}
+
+let megaUltraSimpleJoinStrings: (String, String) -> String = (+) //state operator in parantheses; no funcion, so no need for curly braces
+
+//closure that returns nothing (Void), and performs a range-based For loop:
+
+func basicForLoop(numberOfLoops: Int, closure: () -> Void) {
+    for _ in 0..<numberOfLoops {
+        closure()
+    }
+}
+
+basicForLoop(numberOfLoops: 5, closure: {
+    print("looping all day")
+})
+
+//note: if using a closure in a function, make it the last argument
+
+//simple form:
+basicForLoop(numberOfLoops: 5) {print("still looping")}
+
+//function with predefined for loop
+
+func fixedBasicLoop(closure: () -> Void) {
+    for _ in 0..<3 {
+        closure()
+    }
+}
+
+fixedBasicLoop {print("fixed number looping")}
+
+//capturing a value in a closure:
+
+let closureCapture = "you've been caught!"
+
+basicForLoop(numberOfLoops: 3) {
+    print(closureCapture)
+}
+
+//modifying a variable
+
+var modifiedClosureCapture = "oh, really?"
+
+basicForLoop(numberOfLoops: 2) {
+    print(modifiedClosureCapture)
+    modifiedClosureCapture = "yes, really"
+}
+
+//the above variable has been fully modified by the internal argument in the closure, much like an inout function. Proof:
+
+print(modifiedClosureCapture)
+
+//closures are bult into the native Swift library, to simplify things.
+
+//example of looping through an array using a "forEach closure". works for all collection types
+
+let closureArray = [3,2,1,4]
+
+closureArray.forEach{print($0)}
+
+let sortedArray = closureArray.sorted {$0 < $1}
+
+print(sortedArray)
+
+
