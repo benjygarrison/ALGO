@@ -232,7 +232,7 @@ for dictionaryTuple in thirdDictionary {
 //accessing values:
 
 
-//MARK: native collections
+//MARK: arrays
 
 //creating/accessing arrays
 
@@ -274,7 +274,32 @@ for n in firstArray {
 //can also swap n for _ and not use a specific value, i.e. just return an unrelated string or input base don number of items in loop
 
 
+//MARK: set
 
+//an unordered collection. will only show UNIQUE elements; duplicates will not be collected
 
+var fullSet = Set<Int>([1,2,3,4])
+
+var isInSet = true
+
+if fullSet.contains(1){
+    print("fullSet contains desired number = \(isInSet)")
+} else {
+    print("fullSet contains desired number = false")
+}
+
+//convert array to set:
+
+var emptySet = Set(firstArray)
+
+print("emptySet = \(emptySet)")
+
+//intersection operation to compare sets (try this on arrays later!)
+
+print(emptySet.intersection(fullSet))
+
+//union operation
+
+print(emptySet.union(fullSet))
 
 
