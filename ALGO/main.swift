@@ -563,4 +563,40 @@ let sortedArray = closureArray.sorted {$0 < $1}
 
 print(sortedArray)
 
+//using enum to loop through weekdays:
 
+enum weekDays: Int {
+    case Sunday = 0, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+}
+
+protocol typeOfWeekDay {
+    var isTheWeekend: Bool {get}
+    var isAWeekDay: Bool {get}
+}
+
+extension weekDays: typeOfWeekDay {
+    var isTheWeekend: Bool {
+        switch self {
+        case .Sunday, .Saturday:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var isAWeekDay: Bool {
+        return !isTheWeekend
+    }
+}
+
+print(weekDays.Monday.isTheWeekend)
+print(weekDays.Monday.isAWeekDay)
+
+
+extension weekDays {
+    var dayAfter: weekDays {
+       return weekDays(rawValue: (rawValue + 1) % 7)!
+    }
+}
+
+print(weekDays.Sunday.dayAfter)
