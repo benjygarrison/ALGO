@@ -303,3 +303,78 @@ print(emptySet.intersection(fullSet))
 print(emptySet.union(fullSet))
 
 
+
+//MARK: custom types
+
+//Struct -> a group of values with a "proper" definition; basically a "class". Swift types begin with uppercase letters.
+
+struct Me {
+    var firstName: String
+    var middleName: String?
+    var lastName: String
+    var age: Int
+}
+
+var actualMe = Me(firstName: "Ben", middleName: "Jarod", lastName: "Garrison", age: 41)
+
+print(actualMe.firstName, actualMe.age)
+
+//Class, just like Java, must  be initialized, i.e.getters/setters
+
+class RealMe {
+    var realFirstName: String
+    var realMiddleName: String?
+    var realLastName: String
+    var realAge: Int
+    
+    init(realFirstName: String,
+         realMiddleName: String?,
+         realLastName: String,
+         realAge: Int)
+    {
+        self.realFirstName = realFirstName
+        self.realMiddleName = realMiddleName
+        self.realLastName = realLastName
+        self.realAge = realAge
+    }
+}
+
+let thisIsMe = RealMe(realFirstName: "realBen", realMiddleName: "realJarod", realLastName: "realGarrison", realAge: 41)
+
+print("realMe: \(thisIsMe.realLastName)")
+
+//convenience initializers -> can create another init inside class. forego middle name in example below
+
+
+class SuperRealMe {
+    var superRealFirstName: String
+    var superRealMiddleName: String?
+    var superRealLastName: String
+    var superRealAge: Int
+    
+    init(superRealFirstName: String,
+         superRealMiddleName: String?,
+         superRealLastName: String,
+         superRealAge: Int)
+    {
+        self.superRealFirstName = superRealFirstName
+        self.superRealMiddleName = superRealMiddleName
+        self.superRealLastName = superRealLastName
+        self.superRealAge = superRealAge
+    }
+    
+    convenience init(superRealFirstName: String,
+                     superRealLastName: String,
+                     superRealAge: Int
+    )
+    {
+        self.init(superRealFirstName: superRealFirstName,
+                  superRealMiddleName: nil,
+                  superRealLastName: superRealLastName,
+                  superRealAge: superRealAge)
+    }
+}
+
+let hyperRealMe = SuperRealMe(superRealFirstName: "hyperBen", superRealLastName: "hyperGarrison", superRealAge: 41)
+
+print("hyperRealMe: \(hyperRealMe.superRealLastName)")
