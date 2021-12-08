@@ -415,40 +415,49 @@ print(iAmBen.favoriteShow)
 //getters and setters are used in protocols -> get and set = readable/writeable, set = readable
 // protocols themselves become Types, which can then be used like generic types
 //note: protocols can be extended
+//sometimes need to add "mutating" to func in order to implement setters
 
 //MARK: clean up syntax later!!
 
 protocol ProtocolBen {
     var protocolFirstName: String {get set}
     var protocolLastName: String {get set}
-    //var protocolAge: Int {get set}
+    var protocolAge: Int {get set}
+    mutating func changeAge()
 }
 
 struct StudentBen: ProtocolBen {
     var protocolFirstName: String
-    //var protocolAge: Int
+    var protocolAge: Int
     var protocolLastName: String
     var protocolCourse: String
+    
+    mutating func changeAge() {
+        protocolAge += 1
+    }
 }
 
 class TeacherBen: ProtocolBen {
     var protocolFirstName: String
-    //var protocolAge: Int
+    var protocolAge: Int
     var protocolLastName: String
     
     init(protocolFirstName: String,
-         //protocolAge: Int,
+         protocolAge: Int,
          protocolLastName: String)
     {
         self.protocolFirstName = protocolFirstName
-        //self.protocolAge = protocolAge
+        self.protocolAge = protocolAge
         self.protocolLastName = protocolLastName
+    }
+    func changeAge() {
+        protocolAge += 2
     }
 }
 
-let benStudent = StudentBen(protocolFirstName: "Ben", protocolLastName: "Garrison", protocolCourse: "CompSci")
+var benStudent = StudentBen(protocolFirstName: "Ben", protocolAge: 41, protocolLastName: "Garrison", protocolCourse: "CompSci")
 
-var benTeacher = TeacherBen(protocolFirstName: "Benjamin", protocolLastName: "Garrison")
+var benTeacher = TeacherBen(protocolFirstName: "Benjamin", protocolAge: 41, protocolLastName: "Garrison")
 
 benTeacher.protocolFirstName = "Benji"
 
@@ -462,8 +471,13 @@ print(fullName(forProtocolBen: benTeacher))
 //generic function
 
 func genericFullName<T: ProtocolBen>(forSecondProtocolBen secondProtocolBen: T) -> String {
-    return "\(secondProtocolBen.protocolFirstName)\(secondProtocolBen.protocolLastName)"
+    return "\(secondProtocolBen.protocolFirstName) \(secondProtocolBen.protocolLastName)"
 }
 
 print(genericFullName(forSecondProtocolBen: benStudent))
 print(genericFullName(forSecondProtocolBen: benTeacher))
+
+benTeacher.changeAge()
+benStudent.changeAge()
+
+print(benTeacher.protocolAge, benStudent.protocolAge)
