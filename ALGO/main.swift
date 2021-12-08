@@ -304,7 +304,7 @@ print(emptySet.union(fullSet))
 
 
 
-//MARK: custom types -> Struct is preferred over Class, generally
+//MARK: custom types -> Struct is preferred over Class, generally. Should be used for immutable objects
 
 //Struct -> a group of values with a "proper" definition; basically a "class". Swift types begin with uppercase letters.
 
@@ -319,7 +319,7 @@ var actualMe = Me(firstName: "Ben", middleName: "Jarod", lastName: "Garrison", a
 
 print(actualMe.firstName, actualMe.age)
 
-//Class, just like Java, must  be initialized, i.e.getters/setters
+//Class, best used for mutable objects
 
 class RealMe {
     var realFirstName: String
@@ -409,3 +409,61 @@ if classTestInt == 100 {
 
 print(iAmBen.favoriteShow)
 
+
+//MARK: protocols
+
+//getters and setters are used in protocols -> get and set = readable/writeable, set = readable
+// protocols themselves become Types, which can then be used like generic types
+//note: protocols can be extended
+
+//MARK: clean up syntax later!!
+
+protocol ProtocolBen {
+    var protocolFirstName: String {get set}
+    var protocolLastName: String {get set}
+    //var protocolAge: Int {get set}
+}
+
+struct StudentBen: ProtocolBen {
+    var protocolFirstName: String
+    //var protocolAge: Int
+    var protocolLastName: String
+    var protocolCourse: String
+}
+
+class TeacherBen: ProtocolBen {
+    var protocolFirstName: String
+    //var protocolAge: Int
+    var protocolLastName: String
+    
+    init(protocolFirstName: String,
+         //protocolAge: Int,
+         protocolLastName: String)
+    {
+        self.protocolFirstName = protocolFirstName
+        //self.protocolAge = protocolAge
+        self.protocolLastName = protocolLastName
+    }
+}
+
+let benStudent = StudentBen(protocolFirstName: "Ben", protocolLastName: "Garrison", protocolCourse: "CompSci")
+
+var benTeacher = TeacherBen(protocolFirstName: "Benjamin", protocolLastName: "Garrison")
+
+benTeacher.protocolFirstName = "Benji"
+
+func fullName(forProtocolBen protocolBen: ProtocolBen) -> String {
+    return "\(protocolBen.protocolFirstName) \(protocolBen.protocolLastName)"
+}
+
+print(fullName(forProtocolBen: benStudent))
+print(fullName(forProtocolBen: benTeacher))
+
+//generic function
+
+func genericFullName<T: ProtocolBen>(forSecondProtocolBen secondProtocolBen: T) -> String {
+    return "\(secondProtocolBen.protocolFirstName)\(secondProtocolBen.protocolLastName)"
+}
+
+print(genericFullName(forSecondProtocolBen: benStudent))
+print(genericFullName(forSecondProtocolBen: benTeacher))
