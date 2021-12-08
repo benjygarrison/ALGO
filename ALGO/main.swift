@@ -304,7 +304,7 @@ print(emptySet.union(fullSet))
 
 
 
-//MARK: custom types
+//MARK: custom types -> Struct is preferred over Class, generally
 
 //Struct -> a group of values with a "proper" definition; basically a "class". Swift types begin with uppercase letters.
 
@@ -378,3 +378,34 @@ class SuperRealMe {
 let hyperRealMe = SuperRealMe(superRealFirstName: "hyperBen", superRealLastName: "hyperGarrison", superRealAge: 41)
 
 print("hyperRealMe: \(hyperRealMe.superRealLastName)")
+
+//mutable class properties: just use var instead of let inside/outside class
+
+//class inheritance -> add favorite show to existing class:
+
+class Ben: SuperRealMe {
+    var favoriteShow: String
+    
+    init(favoriteShow: String){
+        self.favoriteShow = favoriteShow
+        super.init(superRealFirstName: "",
+                   superRealMiddleName: "",
+                   superRealLastName: "",
+                   superRealAge: 41)
+    }
+}
+
+var iAmBen = Ben.init(favoriteShow: "has not been decided")
+
+print("Ben' favorite show: \(iAmBen.favoriteShow)")
+
+let classTestInt = 101
+
+if classTestInt == 100 {
+    iAmBen.favoriteShow = "Bob's Burgers"
+} else {
+    iAmBen.favoriteShow = "something else"
+}
+
+print(iAmBen.favoriteShow)
+
