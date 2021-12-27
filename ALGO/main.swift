@@ -600,3 +600,49 @@ extension weekDays {
 }
 
 print(weekDays.Sunday.dayAfter)
+
+
+//MARK: ALGO AND DATA STRUCTURE INTERVIEW QUESTIONS!:
+
+/* Cyclical array rotation
+
+ For example, given
+ 
+ A = [3, 8, 9, 7, 6]
+K = 3
+ 
+ the function should return: [9, 7, 6, 3, 8] (three rotations)
+*/
+
+//MARK: brute force O(n)2:
+
+func rotateArrayFinal(A: [Int], K: Int) -> [Int] {
+    var result = A
+    
+    for _ in 1...K {
+        result = rotateArrayOnce(A: result)
+    }
+    
+    return result
+}
+
+var arrayA = [3, 8, 9, 7, 6]
+let numberOfTimes = 3
+
+func rotateArrayOnce(A: [Int]) -> [Int] {
+
+    var newArray = Array<Int>(repeating: 0, count: A.count)
+    
+    for i in 0..<A.count - 1 {
+        newArray[i + 1] = A[i]
+    }
+    newArray[0] = A.last!
+    
+    return newArray
+}
+
+var finalResult = rotateArrayFinal(A: [1, 2, 3, 4, 5], K: 3)
+
+print(finalResult)
+
+
