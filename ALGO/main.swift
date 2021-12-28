@@ -645,4 +645,37 @@ var finalResult = rotateArrayFinal(A: [1, 2, 3, 4, 5], K: 3)
 
 print(finalResult)
 
+//MARK: TODO -> reverse this algo
+
+//phone number array:
+
+/*
+ reformat string with numbers and spaces to have dashes every three characters. end of string can be 2 characters i.e. "-xx"
+ */
+ 
+func phoneNumberSolution(phoneString: String) -> String {
+     
+    var originalPhoneString = phoneString
+    
+    var newPhoneArray =  Array<Character>()
+    
+    for letter in originalPhoneString {
+        if letter != " " {
+            newPhoneArray.append(letter)
+            print(newPhoneArray)
+        }
+    }
+    
+    
+    var phoneStringSolution = String(newPhoneArray)
+    
+    return phoneStringSolution
+}
+
+var firstPhoneNumber = "123    456789 10 11"
+var secondPhoneNumber = "1234567899011"
+var thirdPhoneNumber = "1--2 345-  6789 - 1011"
+
+print(phoneNumberSolution(phoneString: firstPhoneNumber))
+
 
