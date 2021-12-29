@@ -659,15 +659,17 @@ func phoneNumberSolution(phoneString: String) -> String {
     
     var newPhoneArray =  Array<Character>()
     
+    // ADD INDEX HERE!
+    
     for letter in originalPhoneString {
-        if letter != " " {
+        if letter != " " && letter == "1" || letter == "2" || letter == "3" || letter == "4" || letter == "5" || letter == "6" || letter == "7" || letter == "8" || letter == "9" || letter == "0" {
             newPhoneArray.append(letter)
-            print(newPhoneArray)
-        }
+            //print(newPhoneArray)
+        } //ITERATE INDEX HERE!
     }
     
     
-    var phoneStringSolution = String(newPhoneArray)
+    let phoneStringSolution = String(newPhoneArray)
     
     return phoneStringSolution
 }
@@ -677,5 +679,5 @@ var secondPhoneNumber = "1234567899011"
 var thirdPhoneNumber = "1--2 345-  6789 - 1011"
 
 print(phoneNumberSolution(phoneString: firstPhoneNumber))
-
-
+print(phoneNumberSolution(phoneString: secondPhoneNumber))
+print(phoneNumberSolution(phoneString: thirdPhoneNumber))
