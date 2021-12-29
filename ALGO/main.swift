@@ -660,12 +660,15 @@ func phoneNumberSolution(phoneString: String) -> String {
     var newPhoneArray =  Array<Character>()
     
     for letter in originalPhoneString {
-        if letter == "1" || letter == "2" || letter == "3" || letter == "4" || letter == "5" || letter == "6" || letter == "7" || letter == "8" || letter == "9" || letter == "0" {
+        switch letter {
+        case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0":
             newPhoneArray.append(letter)
+        default: break
         }
     }
+    
     for (i, _) in zip(newPhoneArray.indices, newPhoneArray){
-        if i % 3 == 0 && i != 0 {
+        if i == 3 || (i > 7 && i % 4 == 0) {
             newPhoneArray.insert("-", at: i)
         }
     }
