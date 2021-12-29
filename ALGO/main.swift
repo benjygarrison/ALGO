@@ -650,33 +650,52 @@ print(finalResult)
 //phone number array:
 
 /*
- reformat string with numbers and spaces to have dashes every three characters. end of string can be 2 characters i.e. "-xx"
+ reformat string with numbers and spaces to have dashes every three characters. end of string can be 2 or 3 characters i.e. "-xxx-xx" or "-xx-xx"
  */
  
 func phoneNumberSolution(phoneString: String) -> String {
      
     let originalPhoneString = phoneString
+    var numbersOnlyPhoneString = ""
     
-    var newPhoneArray =  Array<Character>()
+    /*
+     possible shortcut:use replacingOccurrence function
+     ex: let phoneStringNoSPace = originalPhoneString.replacingOccurrence(of: " ", with: "")
+         let phoneStringNoSpaceNoDash = phoneStringNoSpace.replacingOccurrence(of: "-", with: "")
+     */
     
     for letter in originalPhoneString {
         switch letter {
         case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0":
-            newPhoneArray.append(letter)
+            numbersOnlyPhoneString.append(letter)
         default: break
         }
     }
     
-    for (i, _) in zip(newPhoneArray.indices, newPhoneArray){
-        if i == 3 || (i > 7 && i % 4 == 0) {
-            newPhoneArray.insert("-", at: i)
+    var addedDashPhoneString = ""
+    var count = -2
+
+    for letter in numbersOnlyPhoneString {
+        addedDashPhoneString.append(letter)
+        if count % 3 == 0 {
+            addedDashPhoneString.append("-")
         }
+        count+=1
+    }
+    
+    if addedDashPhoneString.last == "-" {
+        addedDashPhoneString = String(addedDashPhoneString.dropLast())
+    }
+    
+    var phoneNumberArray = Array(addedDashPhoneString)
+    
+    let countBackwardsTwo = phoneNumberArray.count-2
+    if phoneNumberArray[countBackwardsTwo] == "-" {
+        phoneNumberArray[countBackwardsTwo] = phoneNumberArray[countBackwardsTwo-1]
+        phoneNumberArray[countBackwardsTwo-1] = "-"
     }
 
-    
-    
-    let phoneStringSolution = String(newPhoneArray)
-    return phoneStringSolution
+    return String(phoneNumberArray)
 }
 
 var firstPhoneNumber = "123  b  456789 10 11"
