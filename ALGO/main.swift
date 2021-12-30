@@ -677,8 +677,8 @@ func phoneNumberSolution(phoneString: String) -> String {
                 numbersOnlyPhoneString.append(letter)
             default: break
             }
-        } else if originalPhoneString.count == 1 {
-            numbersOnlyPhoneString.append("00\(letter)")
+//        } else if originalPhoneString.count == 1 {
+//            numbersOnlyPhoneString.append(letter)
         }
     }
 
@@ -706,10 +706,13 @@ func phoneNumberSolution(phoneString: String) -> String {
         if phoneNumberArray[countBackwardsTwo] == "-" {
             phoneNumberArray[countBackwardsTwo] = phoneNumberArray[countBackwardsTwo-1]
             phoneNumberArray[countBackwardsTwo-1] = "-"
-        } else {
-            print("No number found. Please enter a valid number.")
         }
     }
+        
+        if phoneNumberArray.count <= 0 {
+            print("Please enter at least 2 digits.")
+        }
+    
     
 
     return String(phoneNumberArray)
