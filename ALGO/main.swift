@@ -54,7 +54,7 @@ for i in 0...5 {
     print(i)
 }
 
-//use underscore when you don't car about returning the value of the variable (i.e. "i above")
+//use underscore when you don't care about returning the value of the variable (i.e. "i above")
 
 for _ in 0..<5 {
     print("loop")
@@ -655,20 +655,21 @@ print(finalResult)
  
 func phoneNumberSolution(phoneString: String) -> String {
     
-    var originalPhoneString = "000"
+    let originalPhoneString = phoneString
     
-    if phoneString.count != 0 {
-        originalPhoneString = phoneString
-    }
-    
+//    if phoneString.count != 0 {
+//        originalPhoneString = phoneString
+//    }
+
     var numbersOnlyPhoneString = ""
+    
     
     /*
      possible shortcut:use replacingOccurrence function
      ex: let phoneStringNoSPace = originalPhoneString.replacingOccurrence(of: " ", with: "")
          let phoneStringNoSpaceNoDash = phoneStringNoSpace.replacingOccurrence(of: "-", with: "")
      */
-    
+
     for letter in originalPhoneString {
         if originalPhoneString.count > 1 {
             switch letter {
@@ -680,6 +681,7 @@ func phoneNumberSolution(phoneString: String) -> String {
             numbersOnlyPhoneString.append("00\(letter)")
         }
     }
+
     
     var addedDashPhoneString = ""
     var count = -2
@@ -700,10 +702,15 @@ func phoneNumberSolution(phoneString: String) -> String {
     
     let countBackwardsTwo = phoneNumberArray.count-2
     
-    if phoneNumberArray[countBackwardsTwo] == "-" {
-        phoneNumberArray[countBackwardsTwo] = phoneNumberArray[countBackwardsTwo-1]
-        phoneNumberArray[countBackwardsTwo-1] = "-"
+    if phoneNumberArray.count >= 1 {
+        if phoneNumberArray[countBackwardsTwo] == "-" {
+            phoneNumberArray[countBackwardsTwo] = phoneNumberArray[countBackwardsTwo-1]
+            phoneNumberArray[countBackwardsTwo-1] = "-"
+        } else {
+            print("No number found. Please enter a valid number.")
+        }
     }
+    
 
     return String(phoneNumberArray)
 }
