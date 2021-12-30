@@ -654,8 +654,13 @@ print(finalResult)
  */
  
 func phoneNumberSolution(phoneString: String) -> String {
-     
-    let originalPhoneString = phoneString
+    
+    var originalPhoneString = "000"
+    
+    if phoneString.count != 0 {
+        originalPhoneString = phoneString
+    }
+    
     var numbersOnlyPhoneString = ""
     
     /*
@@ -665,10 +670,14 @@ func phoneNumberSolution(phoneString: String) -> String {
      */
     
     for letter in originalPhoneString {
-        switch letter {
-        case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0":
-            numbersOnlyPhoneString.append(letter)
-        default: break
+        if originalPhoneString.count > 1 {
+            switch letter {
+            case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0":
+                numbersOnlyPhoneString.append(letter)
+            default: break
+            }
+        } else if originalPhoneString.count == 1 {
+            numbersOnlyPhoneString.append("00\(letter)")
         }
     }
     
@@ -690,6 +699,7 @@ func phoneNumberSolution(phoneString: String) -> String {
     var phoneNumberArray = Array(addedDashPhoneString)
     
     let countBackwardsTwo = phoneNumberArray.count-2
+    
     if phoneNumberArray[countBackwardsTwo] == "-" {
         phoneNumberArray[countBackwardsTwo] = phoneNumberArray[countBackwardsTwo-1]
         phoneNumberArray[countBackwardsTwo-1] = "-"
@@ -701,7 +711,11 @@ func phoneNumberSolution(phoneString: String) -> String {
 var firstPhoneNumber = "123  b  456789 10 11"
 var secondPhoneNumber = "1234567899012"
 var thirdPhoneNumber = "1--2 345-  6789 - 1013"
+var edgeCasePhoneNumber = ""
+var edgeCasePhoneNumberTwo = "0 1"
 
 print(phoneNumberSolution(phoneString: firstPhoneNumber))
 print(phoneNumberSolution(phoneString: secondPhoneNumber))
 print(phoneNumberSolution(phoneString: thirdPhoneNumber))
+print(phoneNumberSolution(phoneString: edgeCasePhoneNumber))
+print(phoneNumberSolution(phoneString: edgeCasePhoneNumberTwo))
