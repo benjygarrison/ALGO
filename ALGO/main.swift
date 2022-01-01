@@ -746,22 +746,28 @@ print(phoneNumberSolution(phoneString: edgeCasePhoneNumberTwo))
 
 func returnContact(A: [String], B: [String], C: String) -> String {
     
-    //let contactNameArray = A
+    let contactNameArray = A
     let contactNumberArray = B
     let searchTerm = C
     var searchResult = ""
-    //var count = 0
     
-    let filteredContactNumberArray = contactNumberArray.filter {$0.contains(C)}
+    let filteredContactNumberArray = contactNumberArray.indices.filter {contactNumberArray[$0].contains(searchTerm)}
     
+    let filteredContactNameArray = filteredContactNumberArray.map {contactNameArray[$0].lowercased()}.sorted()
     
-    print(filteredContactNumberArray)
+//    print(filteredContactNumberArray)
+//    print(filteredContactNameArray)
     
+    if filteredContactNameArray.isEmpty {
+        searchResult = "NO CONTACT"
+    } else {
+        searchResult = filteredContactNameArray[0].capitalized
+    }
     
     return searchResult
 }
 
-let A = ["Ben", "Hana", "Rando"]
+let A = ["Ben", "Tana", "Rando"]
 let B = ["4082428796", "9254511975", "4084511975"] // A[i] = B[i]
 let C = "4511975"
 
