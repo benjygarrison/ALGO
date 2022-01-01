@@ -13,7 +13,7 @@ import Foundation
 let newArray = [1,2,3,4,5]
 let target = 6
 //print(newArray.firstIndex(of: 4))
-if let i = newArray.firstIndex(of: 2) {
+if let i = newArray.firstIndex(of: 5) {
     let j = i
     print (j)
 }
@@ -719,7 +719,7 @@ func phoneNumberSolution(phoneString: String) -> String {
 }
 
 var firstPhoneNumber = "123  b  456789 10 11"
-var secondPhoneNumber = "1234567899012"
+var secondPhoneNumber = "1234"
 var thirdPhoneNumber = "1--2 345-  6789 - 1013"
 var edgeCasePhoneNumber = ""
 var edgeCasePhoneNumberTwo = "0 1"
@@ -729,3 +729,41 @@ print(phoneNumberSolution(phoneString: secondPhoneNumber))
 print(phoneNumberSolution(phoneString: thirdPhoneNumber))
 print(phoneNumberSolution(phoneString: edgeCasePhoneNumber))
 print(phoneNumberSolution(phoneString: edgeCasePhoneNumberTwo))
+
+
+//MARK: contact search algo
+/*
+ search contact phone numbers, and return
+ -NO CONTACT if none is found
+ -Contact name if a contact is found
+ -The first alphabetized name if multiple contacts found
+ (partial number should return results)
+ 
+ let A = [Ben, Hana]
+ let B = [4082428796, 9254511975] // A[i] = B[i]
+ let C = "4511"
+ */
+
+func returnContact(A: [String], B: [String], C: String) -> String {
+    
+    //let contactNameArray = A
+    let contactNumberArray = B
+    let searchTerm = C
+    var searchResult = ""
+    //var count = 0
+    
+    let filteredContactNumberArray = contactNumberArray.filter {$0.contains(C)}
+    
+    
+    print(filteredContactNumberArray)
+    
+    
+    return searchResult
+}
+
+let A = ["Ben", "Hana", "Rando"]
+let B = ["4082428796", "9254511975", "4084511975"] // A[i] = B[i]
+let C = "4511975"
+
+print(returnContact(A: A, B: B, C: C))
+
