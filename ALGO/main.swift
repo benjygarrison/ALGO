@@ -995,6 +995,8 @@ print("List is empty = \(linkedListSample.isEmpty)")
 
 //Question 1: write a funtion to return length of any linked list
 
+//MARK: My solution
+
 class TestNode {
     var data: Int
     var next: TestNode?
@@ -1008,7 +1010,6 @@ class TestNode {
 func listLength(_ head: TestNode?) -> Int {
     if head == nil {
         return 0
-        
     }
     
     var length = [Int]()
@@ -1023,16 +1024,152 @@ func listLength(_ head: TestNode?) -> Int {
     return length.count + 1
 }
 
+func otherGuysListLength(_ head: TestNode?) -> Int {
+    if head == nil {
+        return 0
+    }
+    
+    var length = 0
+    var current = head
+    
+    while current != nil {
+        length += 1
+        current = current?.next
+    }
+    
+    return length
+}
+
+//Note: this is wasteful (O(n)) in real world. Just add a size function that tracks list length at all times, as it grows/shrinks, and call that size function
+
+
+/*
+ MARK: Question 2: Merge 2 linked lists.
+ Given pointers to the head nodes of 2 linked lists that merge together at some point, find the node where the two lists merge. The merge point is where both lists point to the same node, i.e. they reference the same memory location. It is guaranteed that the 2 nodes will be different, and neither will ne NULL. If the lists share a common node, return that node's value.
+ After the merge point, both lists will share the same node pointers.
+ 
+ MARK: visualize by imagining 2 train lines, and the first section at which they overlap, i.e. MacArthur Station for Richmond/Pittsburg lines
+ 
+ */
+
+//Brute force O(n^2):
+func findMergeFirstSolution(headA: TestNode?, headB: TestNode?) -> Int? { // O(m*n) -> O(n^2)
+    let lengthA = otherGuysListLength(headA) // O(m)
+    let lengthB = otherGuysListLength(headB) // O(n)
+    
+    var currentLengthA = headA
+    
+    for _ in 0...lengthA-1 { //O(m)
+        var currentLengthB = headB
+        for _ in 0...lengthB-1 { //O(n)
+        let A = currentLengthA?.data
+        let B = currentLengthB?.data
+        //print("A: \(A ?? 0) B: \(B ?? 0)")
+            if A == B {
+                return A
+            }
+        currentLengthB = currentLengthB?.next
+        }
+        currentLengthA = currentLengthA?.next
+    }
+    return nil
+}
+
+//Trade time for space using a Dictionary:
+
+func findMergeSecondSolution(headA: TestNode?, headB: TestNode?) -> Int? { //reduces to O(n)
+    let lengthA = otherGuysListLength(headA) // O(m)
+    let lengthB = otherGuysListLength(headB) // O(n)
+    
+    var dictionary = [Int?: Bool]()
+    var currentB = headB
+    
+    for _ in 0...lengthB-1 { // O(n)
+        let B = currentB?.data
+        dictionary[B] = true
+        currentB = currentB?.next
+    }
+    
+    var currentA = headA
+    
+    for _ in 0...lengthA-1 { // O(m)
+        let A = currentA?.data
+        if dictionary[A] == true {
+            return A
+        }
+        currentA = currentA?.next
+    }
+    return nil
+}
+
+func findMergeThirdSolution(headA: TestNode?, headB: TestNode?) -> Int? { // O(n)
+    let lengthA = otherGuysListLength(headA)
+    let lengthB = otherGuysListLength(headB)
+    
+    var currentA = headA
+    var currentB = headB
+    
+    if lengthB > lengthA { //swap variables if lengthB is longer
+        let temp = currentA
+        currentA = currentB
+        currentB = temp
+    }
+    
+    let difference = abs(lengthA - lengthB) //could return negative, so make it absolute -> "abs()"
+    
+    for _ in 1...difference {
+        currentA = currentA?.next
+    }
+    
+    for _ in 0...lengthB-1 {
+        let A = currentA?.data
+        let B = currentB?.data
+        if  A == B {
+            return A
+        }
+        currentA = currentA?.next
+        currentB = currentB?.next
+    }
+    
+    return nil
+}
+
+
+
 let testNode6 = TestNode(6)
 let testNode5 = TestNode(5, testNode6)
 let testNode4 = TestNode(4, testNode5)
 let testNode3 = TestNode(3, testNode4)
 let testNode2 = TestNode(2, testNode3)
 let testNode1 = TestNode(1, testNode2)
-    
+
+let testNode11 = TestNode(11, testNode4)
+let testNode10 = TestNode(10, testNode11)
+
+//Functions for first question:
+
+print("First Linked List functions:")
 print(listLength(testNode1))
-print(listLength(testNode3))
+print(otherGuysListLength(testNode1))
 print(listLength(nil))
+
+//Functions for second question:
+print("Second Linked List functions:")
+
+print(findMergeFirstSolution(headA: testNode1, headB: testNode10) ?? 0)
+print(findMergeSecondSolution(headA: testNode1, headB: testNode10) ?? 0)
+print(findMergeThirdSolution(headA: testNode10, headB: testNode1) ?? 0)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
