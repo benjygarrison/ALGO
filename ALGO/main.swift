@@ -1005,7 +1005,7 @@ class TestNode {
     }
 }
 
-func listLength(_ head: TestNode?) -> Int? {
+func listLength(_ head: TestNode?) -> Int {
     if head == nil {
         return 0
         
@@ -1019,6 +1019,7 @@ func listLength(_ head: TestNode?) -> Int? {
         node = node?.next!
     }
     
+    
     return length.count + 1
 }
 
@@ -1029,9 +1030,9 @@ let testNode3 = TestNode(3, testNode4)
 let testNode2 = TestNode(2, testNode3)
 let testNode1 = TestNode(1, testNode2)
     
-print(listLength(testNode1)!)
-print(listLength(testNode3)!)
-print(listLength(nil)!)
+print(listLength(testNode1))
+print(listLength(testNode3))
+print(listLength(nil))
 
 
 
