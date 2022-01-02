@@ -767,9 +767,134 @@ func returnContact(A: [String], B: [String], C: String) -> String {
     return searchResult
 }
 
+func returnOtherGuysContactResult(A: [String], B: [String], C: String) -> String {
+    
+    var result = [String]()
+    
+    for i in 0..<B.count {
+        if B[i].contains(C) {
+            result.append(A[i])
+        }
+    }
+    
+    if result.count == 0 {
+        return "NO CONTACT"
+    } else if result.count == 1 {
+        return result.first!.capitalized
+    }
+    
+    return result.sorted().first!.capitalized
+}
+
 let A = ["Ben", "Tana", "Rando"]
 let B = ["4082428796", "9254511975", "4084511975"] // A[i] = B[i]
 let C = "4511975"
 
 print(returnContact(A: A, B: B, C: C))
+print(returnOtherGuysContactResult(A: A, B: B, C: C))
 
+
+
+//MARK: Linked List algos:
+
+/*
+ linked lists are super fast at loading to the front and take up little space (shrink and grow dynamically), compared to arrays
+ 
+ O(1) vs array O(n)!
+ 
+ like a train [(Head)|"A"]--[(Node(s))|"Linked"]--[(Tail)|"List"]--> nil
+ */
+
+//sample code:
+
+class Node {
+    var data: Int
+    var next: Node?
+    
+    init(_ data: Int, _ next: Node? = nil) {
+        self.data = data
+        self.next = next
+    }
+}
+
+class LinkedListSample {
+    private var head: Node?
+    
+    func addFront(_ data: Int) {
+        let newNode = Node(data)
+        newNode.next = head
+        head = newNode
+    }
+    
+    func getFirst() -> Int? {
+        if head == nil {
+            return nil
+        }
+        return head!.data
+    }
+    
+    func addBack(_ data: Int) {   // "while" loops --> O(n)
+        let newNode = Node(data)
+        
+        if head == nil {
+            head = newNode
+            return
+        }
+        
+        var node = head!
+        while(node.next != nil) {
+            node = node.next!
+        }
+        node.next = newNode
+    }
+    
+    func getLast() -> Int? {
+        return 0
+    }
+    
+    func insert(position: Int, data: Int) {
+        
+    }
+    
+    func deleteFirst() {
+        
+    }
+    
+    func deleteLast() {
+        
+    }
+
+    func clear() {
+        
+    }
+
+    func printLinkedList() {
+        if head == nil { return }
+    
+        var result = [Int]()
+        var node = head
+        result.append(node!.next!.data)
+    
+        while node?.next != nil {
+            result.append(node!.next!.data)
+            node = node?.next
+        }
+     
+        print(result)
+        
+    }
+}
+
+
+let linkedListSample = LinkedListSample()
+
+linkedListSample.addFront(3)
+//linkedListSample.addFront(2)
+//linkedListSample.addFront(1)
+//linkedListSample.addFront(4)
+
+linkedListSample.printLinkedList()
+
+linkedListSample.addBack(5)
+ 
+linkedListSample.printLinkedList()
