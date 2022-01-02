@@ -800,10 +800,29 @@ print(returnOtherGuysContactResult(A: A, B: B, C: C))
 /*
  linked lists are super fast at loading to the front and take up little space (shrink and grow dynamically), compared to arrays
  
+ used in stacks and queues
+ 
  O(1) vs array O(n)!
+ 
+ disadvantage: no random access, get/set = O(n)
  
  like a train [(Head)|"A"]--[(Node(s))|"Linked"]--[(Tail)|"List"]--> nil
  */
+
+//MARK: know for interview!!
+
+/*
+ Anything on the front = O(1)
+    - addFront/getFirst/deleteFirst
+ 
+ If you have to walk = O(n)
+    - addBack/getBack/deleteLast
+ 
+ Always the right size
+ 
+ No random access
+ */
+
 
 //sample code:
 
@@ -910,11 +929,15 @@ class LinkedListSample {
     }
     
     var isEmpty: Bool {
+        if head != nil {
         return false
+        } else {
+            return true
+        }
     }
-
+    
     func clear() {
-        
+        head = nil
     }
 
     func printLinkedList() {
@@ -960,3 +983,9 @@ linkedListSample.deleteLast()
 linkedListSample.delete(at: 2)
 
 linkedListSample.printLinkedList()
+
+print("List is empty = \(linkedListSample.isEmpty)")
+
+linkedListSample.clear()
+
+print("List is empty = \(linkedListSample.isEmpty)")
