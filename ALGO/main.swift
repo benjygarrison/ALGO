@@ -989,3 +989,53 @@ print("List is empty = \(linkedListSample.isEmpty)")
 linkedListSample.clear()
 
 print("List is empty = \(linkedListSample.isEmpty)")
+
+
+//MARK: linked list algos:
+
+//Question 1: write a funtion to return length of any linked list
+
+class TestNode {
+    var data: Int
+    var next: TestNode?
+    
+    init(_ data: Int, _ next: TestNode? = nil) {
+        self.data = data
+        self.next = next
+    }
+}
+
+func listLength(_ head: TestNode?) -> Int? {
+    if head == nil {
+        return 0
+        
+    }
+    
+    var length = [Int]()
+    
+    var node = head
+    while(node?.next != nil) {
+        length.append(node!.next!.data)
+        node = node?.next!
+    }
+    
+    return length.count + 1
+}
+
+let testNode6 = TestNode(6)
+let testNode5 = TestNode(5, testNode6)
+let testNode4 = TestNode(4, testNode5)
+let testNode3 = TestNode(3, testNode4)
+let testNode2 = TestNode(2, testNode3)
+let testNode1 = TestNode(1, testNode2)
+    
+print(listLength(testNode1)!)
+print(listLength(testNode3)!)
+print(listLength(nil)!)
+
+
+
+
+
+
+
