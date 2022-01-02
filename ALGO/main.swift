@@ -849,19 +849,68 @@ class LinkedListSample {
     }
     
     func getLast() -> Int? {
-        return 0
+
+        if head == nil {
+            return nil
+        }
+        
+        var node = head!
+        while(node.next != nil) {
+            node = node.next!
+        }
+        
+        return node.data
+        
     }
     
     func insert(position: Int, data: Int) {
+        if position == 0 {
+            addFront(data)
+            return
+        }
         
+        let newNode = Node(data)
+        var currentNode = head
+        
+        for _ in 0..<position - 1 {
+            currentNode = currentNode?.next!
+        }
+        newNode.next = currentNode?.next
+        currentNode?.next = newNode
     }
     
     func deleteFirst() {
-        
+        head = head?.next
     }
     
     func deleteLast() {
+        var nextNode = head
+        var previousNode: Node?
         
+        while(nextNode?.next != nil) {
+            previousNode = nextNode
+            nextNode = nextNode?.next
+        }
+        previousNode?.next = nil
+    }
+    
+    func delete(at position: Int) {
+        if position == 0 {
+            self.deleteFirst()
+            return
+        }
+        
+        var nextNode = head
+        var previousNode: Node?
+        for _ in 0..<position {
+            previousNode = nextNode
+            nextNode = nextNode?.next
+        }
+        previousNode?.next = nextNode?.next
+    }
+    
+    var isEmpty: Bool {
+        return false
     }
 
     func clear() {
@@ -873,7 +922,7 @@ class LinkedListSample {
     
         var result = [Int]()
         var node = head
-        result.append(node!.next!.data)
+        result.append(node!.data)
     
         while node?.next != nil {
             result.append(node!.next!.data)
@@ -889,12 +938,25 @@ class LinkedListSample {
 let linkedListSample = LinkedListSample()
 
 linkedListSample.addFront(3)
-//linkedListSample.addFront(2)
-//linkedListSample.addFront(1)
-//linkedListSample.addFront(4)
+linkedListSample.addFront(2)
+linkedListSample.addFront(1)
+linkedListSample.addFront(4)
 
 linkedListSample.printLinkedList()
 
 linkedListSample.addBack(5)
+
+linkedListSample.insert(position: 3, data: 6)
  
+linkedListSample.printLinkedList()
+
+print(linkedListSample.getFirst()!)
+print(linkedListSample.getLast()!)
+
+linkedListSample.printLinkedList()
+
+linkedListSample.deleteFirst()
+linkedListSample.deleteLast()
+linkedListSample.delete(at: 2)
+
 linkedListSample.printLinkedList()
