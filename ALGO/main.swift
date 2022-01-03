@@ -7,7 +7,7 @@
 
 import Foundation
 
-//MARK: Favor building old-school arrays in inteviews, but understand principles behind making stack/queues
+//MARK: Favor building old-school arrays in interviews, but understand principles behind making stack/queues
 
 print("Stacks:")
 
@@ -68,9 +68,7 @@ struct StackStruct<T> {
     }
 }
 
-
 //MARK: ----------------------------------------------------------
-
 
 print("Queues:")
 
@@ -106,3 +104,61 @@ class Queue<T> {
         array.count
     }
 }
+
+
+
+//MARK: Questions:
+
+/*
+ Question 1: Cyclic Rotation
+ 
+ Same as first array question:  rotate the array K times, but using a queue to do so.
+ 
+ */
+
+func solutionQueueRight(A: [Int], K: Int) -> [Int] {
+    guard !A.isEmpty else {
+        return []
+    }
+    guard K > 0 else {
+        return A
+    }
+    
+    var result = A
+    
+    //treat like a queue that is enqueuing and dequeuing off the end
+    for _ in 1...K {
+        let last = result.last!
+        result.insert(last, at: 0)
+        result.remove(at: A.count)
+    }
+    
+    return result
+}
+
+//Answers for first question
+print("Rotating to the right K times [1, 2, 3, 4, 5]:")
+print(solutionQueueRight(A: [1, 2, 3, 4, 5], K: 1))
+print(solutionQueueRight(A: [1, 2, 3, 4, 5], K: 2))
+print(solutionQueueRight(A: [1, 2, 3, 4, 5], K: 3))
+
+//Question 2: Rotate left:
+
+func solutionQueueLeft(A: [Int], K: Int) -> [Int] {
+    guard !A.isEmpty else {
+        return []
+    }
+    guard K > 0 else {
+        return A
+    }
+    
+    var result = A
+    
+    //treat like queuing and dequeuing off the end
+    for _ in 1...K {
+        
+    }
+    
+    return result
+}
+
