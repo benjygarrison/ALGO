@@ -9,8 +9,6 @@ import Foundation
 
 //MARK: Favor building old-school arrays in interviews, but understand principles behind making stack/queues
 
-print("Stacks:")
-
 /*
  Stacks are literally "stacked."
  
@@ -69,8 +67,6 @@ struct StackStruct<T> {
 }
 
 //MARK: ----------------------------------------------------------
-
-print("Queues:")
 
 /*
  Queues line up just like real-world queues, and are "first in, first out (FIFO)." Whatever enters the queue first gets out first. You "enqueue" and "dequeue" items in a queue. An array can be enqueued by adding to the end (O(1)) and dequeuing from the front (O(n)), moving everything one space forward. The opposite applies to linked lists (add front, remove back).
@@ -137,6 +133,7 @@ func solutionQueueRight(A: [Int], K: Int) -> [Int] {
 }
 
 //Answers for first question
+print("Question 1 solutions:")
 print("Rotating to the right K times [1, 2, 3, 4, 5]:")
 print(solutionQueueRight(A: [1, 2, 3, 4, 5], K: 1))
 print(solutionQueueRight(A: [1, 2, 3, 4, 5], K: 2))
@@ -153,12 +150,104 @@ func solutionQueueLeft(A: [Int], K: Int) -> [Int] {
     }
     
     var result = A
-    
     //treat like queuing and dequeuing off the end
     for _ in 1...K {
-        
+        let first = result.first!
+        result.append(first)
+        result.remove(at: 0)
+        // or: result.removeFirst()
     }
     
     return result
 }
 
+//Question 2 answers:
+print("")
+print("Question 2 solutions:")
+print("Rotating to the left K times [1, 2, 3, 4, 5]:")
+print(solutionQueueLeft(A: [1, 2, 3, 4, 5], K: 1))
+print(solutionQueueLeft(A: [1, 2, 3, 4, 5], K: 2))
+print(solutionQueueLeft(A: [1, 2, 3, 4, 5], K: 3))
+
+
+//Question 3:
+/*
+ Use a stack to reverse a string:
+ */
+
+func solutionReverseString(_ text: String) -> String {
+    var textArray = Array(text)
+    
+    guard !textArray.isEmpty else {
+        return "No string found"
+    }
+    
+    var result = [String]()
+    
+    for char in textArray { // "pushing" onto result array
+        result.append(String(char))
+    }
+    
+    for i in 0..<result.count { // "popping" off the last char in result, and appending it to textArray
+        textArray[i] = Character(result.popLast()!)
+    }
+    
+    return String(textArray)
+}
+
+//Answers for question 3:
+print("")
+print("Question 3 solutions:")
+print("NIL reversed equals: \(solutionReverseString(""))")
+print("abc reversed equals: \(solutionReverseString("abc"))")
+print("!ega dab a setoned enot esab a dagE reversed equals: \(solutionReverseString("!ega dab a setoned enot esab a dagE"))")
+
+
+/* Question 4 --> balanced brackets:
+ https://www.hackerrank.com/challenges/balanced-brackets/problem
+ 
+ Brackets =  {, [, (. If one enclosure is missing, the bracket are not "balanced."
+ Given strings of brackets, determine whether each sequence of brackets is balanced. if balabced, return YES. If unbalanced, return NO.
+*/
+
+func isBalanced(s: String) -> String {
+    var bracketArray = [Character]()
+    
+    for char in s {
+        switch char {
+            
+            //Push on all opening brackets from string
+        case"{", "[", "(":
+            bracketArray.append(char)
+            
+            //Pop off all closing brackets in cases below this point
+        case "}":
+            if (bracketArray.isEmpty || (bracketArray.last != "{")) {
+                return "NO"
+            }
+            bracketArray.popLast()
+        case ")":
+            if (bracketArray.isEmpty || (bracketArray.last != "(")) {
+                return "NO"
+            }
+            bracketArray.popLast()
+        case "]":
+            if (bracketArray.isEmpty || (bracketArray.last != "[")) {
+                return "NO"
+            }
+            bracketArray.popLast()
+        default:
+            print("breaking \(char)")
+        }
+    }
+         
+        return bracketArray.isEmpty ? "YES" : "NO" //ternary operator
+}
+
+print("")
+print("Question 4 solutions:")
+print("Is {([])} a balanced string of brackets? \(isBalanced(s: "{([])}"))")
+print("Is {([)} a balanced string of brackets? \(isBalanced(s: "{([)}"))")
+
+
+print("")
