@@ -7,4 +7,4 @@
 
 import Foundation
 
-print("hash tables next")
+print("all clear")
