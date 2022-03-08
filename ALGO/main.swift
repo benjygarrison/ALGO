@@ -152,3 +152,133 @@ print(oneAway("ben", "beanie baby"))
 print(oneAway("ben", "be"))
 print(oneAway("ben", "ben"))
 print(oneAway("ben", "bonjour"))
+print("")
+
+//MARK: Question 5: Compressor
+//Given a string w/repeating characters, compress string to character followed by no. of occurences.
+//If not shorter, retrn original string.
+
+func compress(_ str: String) -> String {
+    var compressed = ""
+    var count = 0
+    let charArray = Array(str)
+    
+    for i in 0..<str.count {
+        count += 1
+        if i + 1 >= str.count || charArray[i] != charArray[i + 1] { //loop until string ends or new character appears
+            compressed.append(charArray[1])
+            compressed.append(String(count))
+            count = 0
+        }
+    }
+    
+    return compressed.count < str.count ? compressed : str //ternary operator
+}
+
+print(compress("aaabb"))
+print(compress("aabb"))
+print(compress("ab"))
+print(compress("abc"))
+print(compress("zzz"))
+print(compress("aabbaabb"))
+print("")
+
+//MARK: Question 6: Remove duplicates from linked list
+
+func printLinkedList(_ head: Node?) {
+    if head == nil { return }
+    
+    var node = head
+    print(node!.data)
+    
+    while node?.next != nil {
+        print(node!.next!.data)
+        node = node?.next
+    }
+}
+
+class Node {
+    var data: Int
+    var next: Node?
+    
+    init(_ data: Int, _ next: Node? = nil) {
+        self.data = data
+        self.next = next
+    }
+}
+
+func removeDuplicates(_ head: Node?) {
+    
+    var uniqueNodes = Set<Int>()
+    var previous: Node? = nil
+    var current = head
+    
+    while current != nil {
+        if uniqueNodes.contains(current!.data) {
+            previous!.next = current!.next
+        } else {
+            uniqueNodes.insert(current!.data)
+            previous = current
+        }
+        current = current!.next
+    }
+}
+
+let node3 = Node(3)
+let node2 = Node(2, node3)
+let node1 = Node(1, node2)
+node3.next = Node(1)
+printLinkedList(node1)
+print("----")
+print(removeDuplicates(node1) as Any)
+printLinkedList(node1)
+print("")
+
+//MARK: Question 7: Sub-trees
+//determine if a smaller tree is a subtree of a larger tree
+
+class TreeNode {
+    var key: Int
+    var left: TreeNode?
+    var right: TreeNode?
+    
+    init(_ data: Int) {
+        self.key = data
+    }
+}
+
+func getOrder(_ root: TreeNode) -> String {
+    var result = ""
+    preOrderTraversal(root, &result)
+    return result
+}
+
+func preOrderTraversal(_ node: TreeNode?, _ result: inout String) {
+    guard let node = node else {
+        return
+    }
+    result.append(String(node.key)) // root
+    preOrderTraversal(node.left, &result)
+    preOrderTraversal(node.right, &result)
+}
+
+let root = TreeNode(5)
+root.left = TreeNode(3)
+root.right = TreeNode(7)
+root.left?.left = TreeNode(2)
+root.left?.right = TreeNode(4)
+root.right?.left = TreeNode(6)
+root.right?.right = TreeNode(8)
+
+let subTree = TreeNode(7)
+subTree.left = TreeNode(6)
+subTree.right = TreeNode(9)
+
+func isSubTree(tree: TreeNode, _ subTree: TreeNode) -> Bool {
+    let orderedRoot = getOrder(root)
+    let orderedSubTree =  getOrder(subTree)
+    
+    return orderedRoot.contains(orderedSubTree)
+}
+
+print(isSubTree(tree: root, subTree))
