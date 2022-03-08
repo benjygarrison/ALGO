@@ -282,3 +282,61 @@ func isSubTree(tree: TreeNode, _ subTree: TreeNode) -> Bool {
 }
 
 print(isSubTree(tree: root, subTree))
+print("")
+
+//MARK: Question 8: Min Stack
+//Design a stack which, in addition to push/pop, has a function 'min' that returns the minimum element.
+//push, pop, and min should all be O(1)
+
+struct Stack {
+    private var items: [Int] = []
+    private var minItem: [Int] = []
+    
+    mutating func pop() {
+        let popItem = items.popLast()
+        if let poppedElement = popItem, let minElementPop = minItem.last {
+            if poppedElement == minElementPop {
+                minItem.popLast()
+            }
+        }
+    }
+    
+    mutating func push(_ item: Int) {
+        items.append(item)
+        if minItem.count == 0 {
+            minItem.append(item)
+        } else {
+            if let minElement = minItem.last, let lastElement = items.last {
+            if lastElement <= minElement {
+            minItem.append(lastElement)
+                print(minItem)
+                }
+            }
+        }
+        
+    }
+    
+    mutating func min() -> Int? {
+        
+        return minItem.last
+    }
+}
+
+var minStack = Stack()
+
+minStack.push(9)
+minStack.push(4)
+minStack.push(7)
+minStack.push(5)
+minStack.push(8)
+minStack.push(3)
+
+print(minStack)
+
+minStack.pop()
+minStack.pop()
+minStack.pop()
+
+print(minStack.min() as Any)
+
+//print(minStack)
