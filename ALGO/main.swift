@@ -288,6 +288,8 @@ print("")
 //Design a stack which, in addition to push/pop, has a function 'min' that returns the minimum element.
 //push, pop, and min should all be O(1)
 
+//NOTE: see video for linked list solution!
+
 struct Stack {
     private var items: [Int] = []
     private var minItem: [Int] = []
@@ -338,5 +340,159 @@ minStack.pop()
 minStack.pop()
 
 print(minStack.min() as Any)
+print("")
 
-//print(minStack)
+
+//MARK: "Greatest hits"
+
+//MARK: FizzBuzz
+//Make a program that prints 1 to 100...
+//For muliples of 3, print Fizz instead of #, and for multiples of 5, print "Buzz"
+//For multiples of 5 AND 3, print FizzBuzz
+
+func fizzBuzz() {
+    
+    for i in 1...100 {
+        if i % 3 == 0 && i % 5 == 0 {
+            print("FizzBuzz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else {
+        print(i)
+        }
+    }
+    
+}
+
+fizzBuzz()
+
+//MARK: Palindromes
+
+//Built-in way
+func isPalidrome(_ text: String) -> Bool {
+    
+    let textReversed = String(text.reversed())
+    
+    if textReversed == text {
+        return true
+    } else {
+        return false
+    }
+}
+    
+//Demonstrable way
+func isPalidromeTwo(_ text: String) -> Bool {
+    let chars = Array(text)
+    let length = chars.count
+    
+    for i in 0..<length / 2 { // just walk half the array and compare against end - 1
+        if chars[i] != chars[length - i - 1] {
+         return false
+        }
+    }
+    
+    return true
+}
+
+
+print(isPalidrome("mom"))
+print(isPalidrome("kiwi"))
+print(isPalidrome("bad"))
+print(isPalidrome("egadabasetonedenotesabadage"))
+print("------")
+print(isPalidromeTwo("mom"))
+print(isPalidromeTwo("kiwi"))
+print(isPalidromeTwo("bad"))
+print(isPalidromeTwo("egadabasetonedenotesabadage"))
+print("")
+
+//MARK: Ransom Note
+//can a ransom note(1) be writtes from a "magazine" containing letters(2)
+
+func ransomNote(note: String, letters: String) -> Bool {
+    
+    let noteMap = map(note.replacingOccurrences(of: " ", with: ""))
+    let letterMap = map(letters.replacingOccurrences(of: " ", with: ""))
+    
+    //Compare  (loop through dictionary syntax [ note: "_" represents "value"; not needed in this case])
+    for (key, _) in noteMap {
+        if letterMap[key] == nil {
+            return false
+        }
+        if noteMap[key]! > letterMap[key]! {
+            return false
+        }
+    }
+    return true
+}
+
+func map(_ text: String) -> [Character:Int] {
+    var map = [Character:Int]()
+    let chars = Array(text)
+    
+    for char in chars {
+        if map[char] != nil {
+            map[char] = map[char]! + 1
+        } else {
+            map[char] = 1
+        }
+    }
+    return map
+}
+
+print(ransomNote(note: "Pay", letters: "yaP"))
+print(ransomNote(note: "Pay", letters: "yaP a"))
+print(ransomNote(note: "Pay me 1000$", letters: "yaPem0001$"))
+print(ransomNote(note: "Pay", letters: "Pa"))
+
+
+//MARK: Ceaser Cipher
+//Basic encryption algo: take all letters in a message and shift them by a fixed amount
+
+class CeaserCipher {
+    
+    let Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    
+    func encrypt(_ plainText: String, _ n: Int = 3) -> String {
+        var result = ""
+        let charsToEncrypt = Array(plainText)
+        let lookupMap = Array(Alphabet)
+        
+        for char in charsToEncrypt {
+            var encryptedChar: Character = " "
+            if char != " " {
+                let x = lookupMap.firstIndex(of: char)!
+                let key = (n + x) % 26
+                encryptedChar = lookupMap[key]
+            }
+            result.append(encryptedChar)
+        }
+        return result
+    }
+    
+    func decrypt(_ plainText: String, _ n: Int = 3) -> String {
+        var result = ""
+        let charsToEncrypt = Array(plainText)
+        let lookupMap = Array(Alphabet)
+        
+        for char in charsToEncrypt {
+            var decryptedChar: Character = " "
+            if char != " " {
+                let x = lookupMap.firstIndex(of: char)!
+                let key = (n - x) % 26
+                decryptedChar = lookupMap[key]
+            }
+            result.append(decryptedChar)
+        }
+        return result
+    }
+    
+}
+
+let ceaserCipher = CeaserCipher()
+
+print(ceaserCipher.encrypt("ABC"))
+print(ceaserCipher.encrypt("BE SURE TO DRINK YOUR OVALTINE"))
+print(ceaserCipher.encrypt("GOOD TIMES"))
