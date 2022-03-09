@@ -450,6 +450,7 @@ print(ransomNote(note: "Pay", letters: "Pa"))
 
 //MARK: Ceaser Cipher
 //Basic encryption algo: take all letters in a message and shift them by a fixed amount
+//NOTE DIRECTION OF SHIFT. encrypt or decrypt math based on shift direction
 
 class CeaserCipher {
     
@@ -496,3 +497,76 @@ let ceaserCipher = CeaserCipher()
 print(ceaserCipher.encrypt("ABC"))
 print(ceaserCipher.encrypt("BE SURE TO DRINK YOUR OVALTINE"))
 print(ceaserCipher.encrypt("GOOD TIMES"))
+print("")
+      
+//MARK: String Reversal
+
+func reverse(_ text: String) -> String {
+    var chars = Array(text)
+    
+    var left = 0
+    var right = text.count - 1
+    
+    //loop through and swap until hit middle
+    for _ in 0..<text.count / 2 {
+        let tempChar = chars[left]
+        chars[left] = chars[right]
+        chars[right] = tempChar
+        left += 1
+        right -= 1
+    }
+    
+    
+    return String(chars)
+}
+
+print(reverse("Benjamin"))
+print(reverse("nimajneB"))
+print("")
+
+
+//MARK: Integer Reversal (REVISIT THIS!)
+//Note: handle negative integers by keeping dash in place
+
+func reverseInt(_ x: Int) -> Int {
+   var x = x
+   let isNegative = x < 0
+    
+    if isNegative {
+        x = abs(x)
+    }
+    
+    var reverse = 0
+    var lastDigit = 0
+    
+    while x >= 1 {
+        lastDigit = x % 10
+        reverse = reverse * 10 + lastDigit
+        x = x / 10
+    }
+    
+    return isNegative ? reverse * -1 : reverse
+}
+
+print(reverseInt(123))
+print(reverseInt(-123))
+print("")
+
+//MARK: Anagram
+
+func isAnagram (_ text: String, _ anagram: String) -> Bool {
+    
+    if text.count != anagram.count { return false }
+    
+    let text = Array(text).sorted()
+    let anagram = Array(anagram).sorted()
+    
+    if text == anagram { return true }
+    
+    return false
+    
+}
+
+print(isAnagram("abc", "cbb"))
+print(isAnagram("night", "thing"))
+print(isAnagram("bichon", "pug"))
