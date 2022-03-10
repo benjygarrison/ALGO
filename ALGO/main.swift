@@ -570,3 +570,93 @@ func isAnagram (_ text: String, _ anagram: String) -> Bool {
 print(isAnagram("abc", "cbb"))
 print(isAnagram("night", "thing"))
 print(isAnagram("bichon", "pug"))
+
+
+//MARK: LEETCODE
+
+//PALINDROME NUMBER
+
+func isPalindrome(_ x: Int) -> Bool {
+    let xString = String(x)
+    var chars = Array(xString)
+    
+    var left = 0
+    var right = chars.count - 1
+    
+    //loop through and swap until hit middle
+    for _ in 0..<chars.count / 2 {
+        let tempChar = chars[left]
+        chars[left] = chars[right]
+        chars[right] = tempChar
+        left += 1
+        right -= 1
+    }
+    
+    if xString != String(chars) {
+        return false
+    }
+    
+    return true
+}
+    
+
+print(isPalindrome(123))
+print(isPalindrome(121))
+print(isPalindrome(-121))
+print("")
+
+//ROMAN TO INTEGER
+
+func romanToInt(_ s: String) -> Int {
+    
+    var output = 0
+    var inputString = s
+    let romanNumeral: [Character: Int] = ["I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000]
+    let exception: [String: Int] = ["IV": 4, "IX": 9, "XL": 40, "XC": 90, "CD": 400, "CM": 900]
+   
+    for (key, value) in exception {
+        if inputString.contains(key), let subRange = inputString.range(of: key) {
+            output += value
+            inputString.removeSubrange(subRange)
+        }
+    }
+    
+    for char in inputString {
+        if let value = romanNumeral[char] {
+            output += value
+        }
+    }
+
+    return output
+    
+}
+
+print(romanToInt("III"))
+print(romanToInt("LVIII"))
+print(romanToInt("MCMXCIV"))
+
+//MERGE SORTED ARRAY
+
+func mergeArrays(_ nums1: [Int], _ m: Int, _ nums2: [Int], _ n: Int) -> [Int] {
+    
+    var newArray: [Int] = []
+    var count = 0
+    
+    for element in nums1 {
+        if count < m {
+        newArray.append(element)
+           
+        }
+        count += 1
+    }
+    
+    newArray.append(contentsOf: nums2)
+    
+    var finalArray = Array(newArray.sorted())
+    
+    
+    
+    return finalArray
+}
+
+print(mergeArrays([-1,0,0,3,3,3,0,0,0], 6, [1,2,2], 3))
