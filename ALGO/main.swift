@@ -652,7 +652,7 @@ func mergeArrays(_ nums1: [Int], _ m: Int, _ nums2: [Int], _ n: Int) -> [Int] {
     
     newArray.append(contentsOf: nums2)
     
-    var finalArray = Array(newArray.sorted())
+    let finalArray = Array(newArray.sorted())
     
     
     
@@ -660,3 +660,67 @@ func mergeArrays(_ nums1: [Int], _ m: Int, _ nums2: [Int], _ n: Int) -> [Int] {
 }
 
 print(mergeArrays([-1,0,0,3,3,3,0,0,0], 6, [1,2,2], 3))
+
+
+//TWO SUMS
+
+func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+    //create dictionary oto hold index, element
+    var dictionary = [Int: Int]()
+      
+    //iterate through array
+    for (i, element) in nums.enumerated() {
+           let difference = target - element
+           if let j = dictionary[difference] {
+           return [j, i]
+       }
+       dictionary[element] = i
+       }
+       return []
+}
+
+print(twoSum([1,2,3,4], 6))
+
+//ADD TWO NUMBERS (LINKED LISTS)
+//note: no list in this app to pull data from
+
+//func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+//        var node1 = l1
+//        var node2 = l2
+//        
+//        var resultNode = ListNode(0)
+//        var head = resultNode
+//
+//        var carry = 0
+//
+//        while(node1 != nil || node2 != nil) {
+//            var sum = carry
+//
+//            if(node1 != nil) {
+//                sum = sum + node1!.val
+//                node1 = node1!.next
+//            }
+//
+//            if(node2 != nil) {
+//                sum = sum + node2!.val
+//                node2 = node2!.next
+//            }
+//
+//            let remainder = sum % 10
+//            carry = sum / 10
+//
+//            var newNode = ListNode(remainder)
+//            resultNode.next = newNode
+//            resultNode = resultNode.next!
+//        }
+//
+//        //----
+//        
+//        if(carry != 0) {
+//            var newNode = ListNode(carry)
+//            resultNode.next = newNode
+//            resultNode = resultNode.next!
+//        }
+//
+//        return head.next
+//    }
