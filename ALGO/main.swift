@@ -772,3 +772,86 @@ func runningSum(_ nums: [Int]) -> [Int] {
 
 print(runningSum([3,3,3,3]))
 print("")
+
+
+//REMOVE DUPLICATES
+//remove duplicate values from array without adding any space complexity O(1) [no new array structure]
+
+func removeDuplicates(_ nums: [Int]) -> Int {
+    if nums.isEmpty {
+        return 0
+    }
+    var nums = Array(nums) //cannot declare in leetcode version (inout function)
+    
+    var i = 1
+    var j = 1
+    
+    while j < nums.endIndex {
+        if nums[j] != nums[i - 1] {
+            nums[i] = nums[j]
+            i += 1
+            j += 1
+        } else {
+            j += 1
+        }
+    }
+    
+    return i
+   }
+
+print(removeDuplicates([1,1,2,3,3,3,4,4,4]))
+print("")
+
+//REMOVE ELEMENT
+//remove specified element in-place
+
+func removeElement(_ nums: [Int], _ val: Int) -> Int {
+    if nums.isEmpty { return 0 }
+    var nums = Array(nums) //cannot declare in leetcode version (inout function)
+    
+    nums = nums.filter { (num) in num != val }
+               return nums.count
+}
+
+
+print(removeElement([3,2,2,3], 3))
+print("")
+
+//SEARCH INSERT POSITION
+//return index of value if it exists; if not, return index of where it would be if sorted
+
+func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+    //beginning and end of array variables
+    var start = 0
+    var end = (nums.count - 1)
+    
+    //guard for number larger than array elements
+    if target > nums.max()! { start = nums.count}
+    if nums.count > 1 {
+        if target <= nums[0] { return 0 }
+        if target == nums[1] { return 1 }
+    }
+    
+    
+    //split the array in half O(log n)
+    while start < end {
+        let mid = start + ((end - start) / 2)
+        if nums[mid] == target {
+            return mid
+        } else if nums[mid] > target {
+            end = mid
+        } else {
+            start = mid + 1
+        }
+    }
+    
+    return start //default
+}
+print("---")
+print(searchInsert([1,3,5,6], 5)) // 2
+print(searchInsert([1,3,5,6], 2)) //1
+print(searchInsert([1,3,5,6], 7)) // 4
+print(searchInsert([1], 2)) // 1
+print(searchInsert([1,2,4,6,7,8,9], 3)) //2
+print(searchInsert([3,6,7,8,10], 5)) //1
+
