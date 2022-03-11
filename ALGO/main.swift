@@ -687,7 +687,7 @@ print(twoSum([1,2,3,4], 6))
 //func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
 //        var node1 = l1
 //        var node2 = l2
-//        
+//
 //        var resultNode = ListNode(0)
 //        var head = resultNode
 //
@@ -715,7 +715,7 @@ print(twoSum([1,2,3,4], 6))
 //        }
 //
 //        //----
-//        
+//
 //        if(carry != 0) {
 //            var newNode = ListNode(carry)
 //            resultNode.next = newNode
@@ -724,3 +724,51 @@ print(twoSum([1,2,3,4], 6))
 //
 //        return head.next
 //    }
+
+//BUILD ARRAY FROM PERMUTATION
+//Sort input array, pop off indices and capture them in second array
+
+func buildArray(_ nums: [Int]) -> [Int] {
+    var result = [Int]()
+            for value in nums {
+                let value = nums[value]
+                result.append(value)
+            }
+            return result
+}
+
+print(buildArray([5,0,1,2,3,4]))
+print("")
+
+//GET CONCATENATION OF ARRAYS
+
+func getConcatenation(_ nums: [Int]) -> [Int] {
+    var nums2 = Array(nums)
+    
+    for num in nums {
+        nums2.append(num)
+    }
+    
+    return nums2
+   }
+
+print(getConcatenation([3,2,1,4]))
+print("")
+
+//RUNNING SUM OF 1D ARRAY
+
+func runningSum(_ nums: [Int]) -> [Int] {
+    var nums2: [Int] = []
+    
+    for i in 0..<nums.count {
+        if i == 0 {
+            nums2.append(nums[i])
+        } else {
+            nums2.append(nums2[i - 1] + nums[i])
+        }
+    }
+    return nums2
+}
+
+print(runningSum([3,3,3,3]))
+print("")
